@@ -14,8 +14,9 @@
   ],
   "timezone": "browser",
   "schemaVersion": 39,
-  "version": 2,
+  "version": 4,
   "refresh": "1m",
+  "style": "dark",
   "time": {
     "from": "now-30d",
     "to": "now"
@@ -42,6 +43,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 6,
@@ -92,6 +94,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 6,
@@ -142,6 +145,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 6,
@@ -191,6 +195,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 6,
@@ -235,12 +240,13 @@
     },
     {
       "id": 6,
-      "type": "barchart",
+      "type": "tim012432-calendarheatmap-panel",
       "title": "Sessions per day",
       "datasource": {
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -251,38 +257,28 @@
         "defaults": {
           "unit": "short",
           "decimals": 0,
-          "displayName": "Sessions",
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "#3987e5"
-          },
-          "custom": {
-            "lineWidth": 0,
-            "fillOpacity": 90,
-            "gradientMode": "none"
-          },
-          "min": 0
+          "displayName": "Sessions"
         },
         "overrides": []
       },
       "options": {
-        "orientation": "auto",
-        "xTickLabelRotation": -45,
-        "showValue": "never",
-        "barWidth": 0.6,
-        "legend": {
-          "showLegend": false,
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "colorScheme": "green",
+        "emptyColor": "#2c2c2a",
+        "autoRectSize": true,
+        "space": 3,
+        "radius": 2,
+        "showLegend": true,
+        "showMonthLabels": true,
+        "monthLabelMode": "default",
+        "weekStart": "sunday",
+        "showWeekLabels": true,
+        "weekLabelMode": "default",
+        "aggregation": "sum",
+        "showTooltip": true
       },
       "targets": [
         {
-          "query": "from(bucket: \"minecraft\") |> range(start: -90d) |> filter(fn: (r) => r._measurement == \"mc_session\" and r._field == \"duration_seconds\") |> aggregateWindow(every: 1d, fn: count, createEmpty: false)",
+          "query": "from(bucket: \"minecraft\") |> range(start: -1y) |> filter(fn: (r) => r._measurement == \"mc_session\" and r._field == \"duration_seconds\") |> aggregateWindow(every: 1d, fn: count, createEmpty: false)",
           "refId": "A",
           "datasource": {
             "type": "influxdb",
@@ -299,6 +295,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -398,6 +395,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -456,6 +454,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -506,6 +505,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -556,6 +556,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -607,6 +608,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 12,
@@ -619,7 +621,7 @@
           "custom": {
             "drawStyle": "line",
             "lineWidth": 2,
-            "fillOpacity": 0,
+            "fillOpacity": 8,
             "gradientMode": "none",
             "showPoints": "never",
             "pointSize": 5,
@@ -712,6 +714,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -762,6 +765,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -812,6 +816,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -824,7 +829,7 @@
           "custom": {
             "drawStyle": "line",
             "lineWidth": 2,
-            "fillOpacity": 0,
+            "fillOpacity": 8,
             "gradientMode": "none",
             "showPoints": "never",
             "pointSize": 5,
@@ -917,6 +922,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -1038,6 +1044,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -1088,6 +1095,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 8,
         "w": 8,
@@ -1151,6 +1159,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1201,6 +1210,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1251,6 +1261,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1301,6 +1312,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1351,6 +1363,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1401,6 +1414,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "transparent": true,
       "gridPos": {
         "h": 4,
         "w": 4,

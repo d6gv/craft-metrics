@@ -44,7 +44,7 @@ services:
       start_period: 30s
 
   grafana:
-    image: grafana/grafana-oss:11.2.0
+    image: grafana/grafana-oss:13.0.2
     container_name: craft-metrics-grafana
     restart: unless-stopped
     depends_on:
@@ -56,6 +56,7 @@ services:
       INFLUXDB_INIT_ORG: ${INFLUXDB_INIT_ORG}
       INFLUXDB_INIT_BUCKET: ${INFLUXDB_INIT_BUCKET}
       INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_INIT_ADMIN_TOKEN}
+      GF_INSTALL_PLUGINS: "tim012432-calendarheatmap-panel 1.1.1"
     ports:
       - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
     volumes:
