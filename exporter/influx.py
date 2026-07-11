@@ -28,7 +28,11 @@ def write_lines(lines, url, org, bucket, token, retries=3, backoff_seconds=2, ti
             response = requests.post(endpoint, params=params, headers=headers, data=payload, timeout=timeout)
             if response.status_code // 100 == 2:
                 return
-            last_error = RuntimeError(f"InfluxDB returned {response.status_code}: {response.text[:200]}")
+            error = RuntimeError(f"InfluxDB returned {response.status_code}: {response.text[:200]}")
+            # 4xx means a bad token or malformed payload; retrying can't fix that, so fail fast.
+            if response.status_code // 100 == 4:
+                raise error
+            last_error = error
         except requests.RequestException as exc:
             last_error = exc
 
