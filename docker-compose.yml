@@ -67,3 +67,28 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+
+  exporter:
+    build: ./exporter
+    container_name: craft-metrics-exporter
+    restart: unless-stopped
+    depends_on:
+      mc:
+        condition: service_healthy
+      influxdb:
+        condition: service_healthy
+    environment:
+      INFLUX_URL: http://influxdb:8086
+      INFLUX_ORG: ${INFLUXDB_INIT_ORG}
+      INFLUX_BUCKET: ${INFLUXDB_INIT_BUCKET}
+      INFLUX_TOKEN: ${INFLUXDB_INIT_ADMIN_TOKEN}
+      SCRAPE_INTERVAL_SECONDS: ${EXPORTER_SCRAPE_INTERVAL_SECONDS:-60}
+    volumes:
+      - ./data:/mc-data:ro
+      - ./exporter-state:/state
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import os,sys,time; p='/state/exporter_state.json'; interval=int(os.environ.get('SCRAPE_INTERVAL_SECONDS','60')); sys.exit(0 if os.path.exists(p) and time.time()-os.path.getmtime(p) < interval*3 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
