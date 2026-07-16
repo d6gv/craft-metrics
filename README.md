@@ -52,7 +52,7 @@ All runtime state lives in gitignored directories created on first run: `data/` 
 ## Quick start
 
 ```bash
-git clone https://github.com/k31337/craft-metrics.git
+git clone https://github.com/d6gv/craft-metrics.git
 cd craft-metrics
 cp .env.example .env
 # edit .env — set the token and passwords (see Configuration)
